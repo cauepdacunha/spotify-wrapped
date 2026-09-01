@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #000;
+  position: relative;
+}
+
+.app::after {
+  content: 'WRAPPED 2026';
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+/* Barra de progresso */
+.barra-progresso {
+  display: flex;
+  gap: 4px;
+  padding: 12px;
+  z-index: 10;
+}
+
+.segmento {
+  flex: 1;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.preenchido {
+  height: 100%;
+  width: 0%;
+  background-color: white;
+}
+
+.preenchido.completo {
+  width: 100%;
+}
+
+.preenchido.animando {
+  animation: encher 3s linear forwards;
+}
+
+@keyframes encher {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Slides */
+.slide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: white;
+  animation: entrada 0.5s ease;
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 16px 0;
+}
+
+.slide p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Cores por slide */
+.intro { background: linear-gradient(160deg, #1db954, #000000); }
+.minutos { background: linear-gradient(160deg, #000000, #1db954); }
+.artista { background: linear-gradient(135deg, #191414, #1db954); }
+.musica { background: linear-gradient(135deg, #1db954, #191414); }
+.genero { background: linear-gradient(160deg, #000000, #0d5c2c); }
+.top5 { background: #121212; }
+.resumo { background: linear-gradient(180deg, #1db954, #000000); }
+
+/* Lista do Top 5 */
+.slide ol {
+  list-style: none;
+  counter-reset: ranking;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.slide ol li {
+  counter-increment: ranking;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.slide ol li::before {
+  content: counter(ranking);
+  font-size: 1rem;
+  font-weight: 800;
+  background-color: rgba(29, 185, 84, 0.3);
+  color: #1db954;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+
+/* Responsivo - telas menores (tablets e celulares) */
+@media (max-width: 768px) {
+  .slide h1 {
+    font-size: 2.2rem;
+  }
+
+  .slide p {
+    font-size: 1rem;
+  }
+
+  .slide {
+    padding: 16px;
+  }
+
+  .app::after {
+    font-size: 0.65rem;
+    bottom: 12px;
+    left: 12px;
+  }
+
+  .barra-progresso {
+    padding: 10px;
+  }
+}
+
+/* Responsivo - celulares bem pequenos */
+@media (max-width: 380px) {
+  .slide h1 {
+    font-size: 1.8rem;
+  }
+
+  .slide ol li {
+    font-size: 1.1rem;
+  }
+}
